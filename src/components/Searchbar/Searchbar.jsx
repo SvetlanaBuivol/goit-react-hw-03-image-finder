@@ -4,22 +4,22 @@ import { Notify } from 'notiflix';
 
 export default class Searchbar extends Component {
   state = {
-    image: '',
+    request: '',
   };
 
   handleImageChange = event => {
-    this.setState({ image: event.currentTarget.value.toLowerCase() });
+    this.setState({ request: event.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.image.trim() === '') {
+    if (this.state.request.trim() === '') {
       Notify.warning('Please enter a value', { position: 'center-top' });
       return;
     }
-    this.props.onSubmit(this.state.image);
-    this.setState({ image: '' });
+    this.props.onSubmit(this.state.request);
+    this.setState({ request: '' });
   };
 
   render() {
@@ -32,7 +32,7 @@ export default class Searchbar extends Component {
             autoFocus
             placeholder="Search images and photos"
             onChange={this.handleImageChange}
-            value={this.state.image}
+            value={this.state.request}
           />
           <button type="submit">
             <RiSearchLine />
