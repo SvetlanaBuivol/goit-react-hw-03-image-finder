@@ -6,11 +6,11 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 export class App extends React.Component {
 
   state = {
-    request: '',
+    query: '',
   }
 
-  handleFormSubmit = request => {
-    this.setState({ request });
+  handleFormSubmit = query => {
+    this.setState({ query });
 
   }
 
@@ -18,7 +18,7 @@ export class App extends React.Component {
     return (
     <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        <ImageGallery image={this.state.request}/>
+        <ImageGallery query={this.state.query}/>
     </div>
   );
   } 
