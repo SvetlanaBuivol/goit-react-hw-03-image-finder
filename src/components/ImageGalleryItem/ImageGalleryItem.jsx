@@ -30,8 +30,9 @@ export class ImageGalleryItem extends Component {
 }
 
 ImageGalleryItem.propTypes = {
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   tags: PropTypes.string.isRequired,
-  largeUrl: PropTypes.string.isRequired,
-  toggleModal: PropTypes.func.isRequired,
+  largeUrl: PropTypes.string,
+  toggleModal: PropTypes.func,
+  webformatURL: PropTypes.string.isRequired,
 };
