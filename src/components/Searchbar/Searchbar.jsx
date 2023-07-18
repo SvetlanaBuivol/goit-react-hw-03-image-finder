@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { RiSearchLine } from 'react-icons/ri';
 import { Notify } from 'notiflix';
 import { SearchbarHead, SearchForm, Input } from './Searchbar.styled';
@@ -43,4 +44,9 @@ export default class Searchbar extends Component {
       </SearchbarHead>
     );
   }
+}
+
+Searchbar.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleImageChange: PropTypes.func,
 }
