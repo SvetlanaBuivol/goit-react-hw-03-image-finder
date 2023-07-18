@@ -24,16 +24,17 @@ export default class Searchbar extends Component {
   };
 
   render() {
+    const { handleSubmit, handleImageChange, state } = this;
     return (
       <SearchbarHead>
-        <SearchForm onSubmit={this.handleSubmit}>
+        <SearchForm onSubmit={handleSubmit}>
           <Input
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            onChange={this.handleImageChange}
-            value={this.state.query}
+            onChange={handleImageChange}
+            value={state.query}
           />
           <button type="submit">
             <RiSearchLine />
