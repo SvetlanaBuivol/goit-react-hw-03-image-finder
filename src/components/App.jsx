@@ -43,16 +43,15 @@ export class App extends React.Component {
             { position: 'center-center' }
           );
           return;
-        } 
-          const totalPages = Math.ceil(response.data.totalHits / 12);
-          this.setState(prevState => ({
-            images: prevState.images
-              ? [...prevState.images, ...response.data.hits]
-              : response.data.hits,
-            showButton: page < totalPages,
-          }));
         }
-      )
+        const totalPages = Math.ceil(response.data.totalHits / 12);
+        this.setState(prevState => ({
+          images: prevState.images
+            ? [...prevState.images, ...response.data.hits]
+            : response.data.hits,
+          showButton: page < totalPages,
+        }));
+      })
       .catch(error => console.log(error))
       .finally(() => {
         this.setState({ loading: false });
@@ -70,7 +69,7 @@ export class App extends React.Component {
   };
 
   handleLoadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1,}));
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   render() {
