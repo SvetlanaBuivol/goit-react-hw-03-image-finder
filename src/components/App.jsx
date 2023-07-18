@@ -18,48 +18,59 @@ export class App extends React.Component {
   };
 
   componentDidUpdate(_, prevState) {
-    if (prevState.query !== this.state.query) {
-      this.setState({
-        loading: true,
-        images: null,
-        page: 1,
-        showButton: false,
-      });
+    if (
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
+      // this.setState({
+      //   loading: true,
+      //   images: null,
+      //   page: 1,
+      //   showButton: false,
+      // });
       this.fetchImages();
     }
   }
 
   fetchImages = () => {
     const { query, page } = this.state;
+    this.setState({ loading: true });
     getImages(query, page)
       .then(response => {
-        if (response.data.total) {
+        if (!response.data.total) {
+          Notify.failure(
+            'Sorry, there are no images matching your search query. Please try again.',
+            { position: 'center-center' }
+          );
+          return;
+        } else {
           const totalPages = Math.ceil(response.data.totalHits / 12);
           this.setState(prevState => ({
             images: prevState.images
               ? [...prevState.images, ...response.data.hits]
               : response.data.hits,
-            loading: false,
             showButton: page < totalPages,
-            page: page + 1,
           }));
-        } else {
-          this.setState({ loading: false });
-          Notify.failure(
-            'Sorry, there are no images matching your search query. Please try again.',
-            { position: 'center-center' }
-          );
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => {
+        this.setState({ loading: false });
+      });
   };
 
   handleFormSubmit = query => {
-    this.setState({ query, page: 1 });
+    this.setState({
+      query,
+      page: 1,
+      loading: true,
+      images: null,
+      showButton: false,
+    });
   };
 
   handleLoadMore = () => {
-    this.fetchImages();
+    this.setState(prevState => ({ page: prevState.page + 1,}));
   };
 
   render() {
@@ -67,11 +78,9 @@ export class App extends React.Component {
     return (
       <Container>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {loading && <Loader />}
         {images && <ImageGallery images={images} />}
-        {images && !showButton && (
-          <Notification text="All images loaded" />
-        )}
+        {loading && <Loader />}
+        {images && !showButton && <Notification text="All images loaded" />}
         {showButton && <Button onClick={this.handleLoadMore} />}
       </Container>
     );

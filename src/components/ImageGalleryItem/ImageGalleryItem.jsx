@@ -21,7 +21,7 @@ export class ImageGalleryItem extends Component {
         <img src={webformatURL} alt={tags} onClick={toggleModal} />
         {this.state.showModal && (
           <Modal onClose={toggleModal}>
-            <img src={largeURL} alt={tags} onClick={toggleModal} />
+            <img src={largeURL} alt={tags} />
           </Modal>
         )}
       </GalleryItem>
