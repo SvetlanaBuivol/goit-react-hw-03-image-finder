@@ -43,7 +43,7 @@ export class App extends React.Component {
             { position: 'center-center' }
           );
           return;
-        } else {
+        } 
           const totalPages = Math.ceil(response.data.totalHits / 12);
           this.setState(prevState => ({
             images: prevState.images
@@ -52,7 +52,7 @@ export class App extends React.Component {
             showButton: page < totalPages,
           }));
         }
-      })
+      )
       .catch(error => console.log(error))
       .finally(() => {
         this.setState({ loading: false });
