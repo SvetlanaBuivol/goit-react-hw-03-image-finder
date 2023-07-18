@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'components/Modal/Modal';
 import { GalleryItem } from './ImageGalleryItem.styled';
 
@@ -27,3 +28,10 @@ export class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  url: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  largeUrl: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};

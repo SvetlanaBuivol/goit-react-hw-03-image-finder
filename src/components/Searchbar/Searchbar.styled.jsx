@@ -55,6 +55,7 @@ export const Input = styled.input`
   font-size: 20px;
   border: none;
   outline: none;
+  padding: 0;
   padding-left: 4px;
   padding-right: 4px;
 `;
